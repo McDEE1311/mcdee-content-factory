@@ -1,0 +1,78 @@
+"""
+Application settings loaded from .env
+"""
+from pydantic_settings import BaseSettings
+from pydantic import field_validator
+from typing import Optional
+import os
+
+
+class Settings(BaseSettings):
+    # App
+    APP_ENV: str = "dev"
+    APP_HOST: str = "127.0.0.1"
+    APP_PORT: int = 8899
+
+    # Database
+    DB_PATH: str = "data/content_factory.db"
+
+    # Ollama
+    OLLAMA_BASE_URL: str = "http://127.0.0.1:11434"
+    OLLAMA_MODEL: str = "qwen2.5:7b-instruct"
+
+    # Publishing
+    DAILY_VIDEO_LIMIT: int = 10
+    AUTO_APPROVE: bool = False
+    UPLOAD_START_HOUR: int = 8
+    UPLOAD_END_HOUR: int = 20
+    LOCAL_TIMEZONE: str = "America/Chicago"
+
+    # YouTube
+    YOUTUBE_CLIENT_SECRET_FILE: str = "credentials/youtube_client_secret.json"
+    YOUTUBE_TOKEN_FILE: str = "credentials/youtube_token.json"
+    YOUTUBE_CHANNEL_ID: Optional[str] = None
+
+    # X / Twitter
+    X_API_KEY: Optional[str] = None
+    X_API_SECRET: Optional[str] = None
+    X_ACCESS_TOKEN: Optional[str] = None
+    X_ACCESS_TOKEN_SECRET: Optional[str] = None
+    X_BEARER_TOKEN: Optional[str] = None
+
+    # Reddit
+    REDDIT_CLIENT_ID: Optional[str] = None
+    REDDIT_CLIENT_SECRET: Optional[str] = None
+    REDDIT_USER_AGENT: str = "mcdee-content-factory/0.1"
+
+    # Stock Images
+    PEXELS_API_KEY: Optional[str] = None
+    PIXABAY_API_KEY: Optional[str] = None
+
+    # TTS
+    TTS_ENGINE: str = "piper"
+    VOICE_MODEL: str = "en_US-lessac-medium"
+
+    model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "extra": "ignore"}
+
+    @property
+    def db_url(self) -> str:
+        return f"sqlite:///{self.DB_PATH}"
+
+    @property
+    def is_dev(self) -> bool:
+        return self.APP_ENV == "dev"
+
+    @property
+    def reddit_enabled(self) -> bool:
+        return bool(self.REDDIT_CLIENT_ID and self.REDDIT_CLIENT_SECRET)
+
+    @property
+    def youtube_api_enabled(self) -> bool:
+        return os.path.exists(self.YOUTUBE_CLIENT_SECRET_FILE)
+
+    @property
+    def x_api_enabled(self) -> bool:
+        return bool(self.X_API_KEY and self.X_ACCESS_TOKEN)
+
+
+settings = Settings()
