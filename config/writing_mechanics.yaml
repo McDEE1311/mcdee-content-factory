@@ -1,0 +1,86 @@
+# Trend Forge Writing Mechanics
+# Storytelling principles extracted from narrative nonfiction and thriller writing
+# These are MECHANICS only — not prose style to copy
+
+momentum:
+  principle: "Every section must end with unresolved tension pulling viewer to next"
+  technique: "Open loop at end of every 60 seconds"
+  examples:
+    - "But that was only the beginning."
+    - "What nobody knew yet would change everything."
+    - "The real problem wasn't what they could see. It was what they couldn't."
+
+escalation:
+  principle: "Consequences grow larger with every section"
+  technique: "Each revelation should feel bigger than the last"
+  examples:
+    - "Section 1: Small deception detected"
+    - "Section 2: Pattern of deception revealed"
+    - "Section 3: Scale of deception exposed"
+    - "Section 4: Systemic failure revealed"
+
+mystery:
+  principle: "Build reputation before reveal — make viewer invest before judging"
+  technique: "Show the world's belief in the subject before showing the crack"
+  examples:
+    - "Show success first. Then show what was wrong underneath."
+    - "Let viewer almost believe. Then pull the rug."
+
+human_stakes:
+  principle: "Connect every abstract fact to a human being"
+  technique: "Name specific people. Show their faces. Show their loss."
+  examples:
+    - "Not '$700 million lost' — 'Patients received wrong test results. Doctors made decisions based on false data.'"
+    - "Not 'the company collapsed' — 'That morning, 800 people lost their jobs and their health insurance in the same email.'"
+
+operational_clarity:
+  principle: "Show HOW things happened, not just THAT they happened"
+  technique: "Walk through the mechanism of the deception or disaster step by step"
+  examples:
+    - "Not 'the fraud continued' — 'Every Monday morning, the team manually entered false results into the database before investors arrived.'"
+
+pacing:
+  short_sentence_triggers:
+    - "Dramatic reveal moments"
+    - "Collapse sequence"
+    - "Arrest or conviction"
+    - "Shocking number revealed"
+  long_sentence_triggers:
+    - "Building context"
+    - "Explaining complex systems"
+    - "Character motivation"
+  rhythm_rule: "Alternate: long buildup → short punch → long context → short punch"
+
+retention_beats:
+  every_45_60_seconds_one_of:
+    - "New question raised"
+    - "New piece of evidence revealed"
+    - "New character introduced"
+    - "New threat or danger surfaced"
+    - "Contradiction exposed"
+    - "Timeline reversal revealed"
+    - "Stakes raised higher"
+
+banned_phrases:
+  - "In today's video"
+  - "Little did they know"
+  - "The rest is history"
+  - "Everything changed"
+  - "Needless to say"
+  - "What happened next will shock you"
+  - "This is the story of"
+  - "X was born in"
+  - "Stay tuned"
+  - "Like and subscribe"
+  - "Let that sink in"
+  - "In this documentary we will explore"
+
+hook_categories:
+  contradiction: "Public success vs private failure"
+  mystery: "Something powerful was hidden"
+  betrayal: "Trusted person deceived everyone"
+  countdown: "Time was running out before exposure"
+  hidden_truth: "Everyone was looking at the wrong thing"
+  disaster: "The collapse was already inevitable"
+  warning: "The signs were there — nobody saw them"
+  open_loop: "What really happened has never been told"

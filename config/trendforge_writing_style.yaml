@@ -1,0 +1,55 @@
+# Trend Forge Documentary Writing Style
+# This is our house style — enforced in every script generation
+
+voice:
+  tone: "investigative documentary"
+  pace: "calm, serious, direct, dramatic"
+  authority: "evidence-driven narrator"
+  
+rules:
+  DO:
+    - "Use short punchy sentences during dramatic moments"
+    - "Use longer sentences when explaining complex situations"
+    - "End every section with unresolved tension or an open question"
+    - "Introduce a new question, reveal, or reversal every 45-60 seconds"
+    - "Name specific people, specific amounts, specific dates"
+    - "Show the human cost of every decision"
+    - "Let facts create emotion — do not manufacture emotion"
+    - "Build to revelations — reveal information at the right moment"
+    
+  NEVER:
+    - "In today's video..."
+    - "Little did they know..."
+    - "Stay tuned to find out..."
+    - "Subscribe for more content"
+    - "In this documentary we will explore..."
+    - "The story of X is a fascinating one"
+    - "X is a name that many of you may recognize"
+    - "Let that sink in"
+    - "Shocking truth about..."
+    - Generic AI filler phrases
+    - Fake emotional reactions
+    - Unearned drama
+    - Side A / Side B framing
+    
+structure:
+  hook:
+    duration_seconds: 45
+    goal: "Create unanswered question. Drop viewer mid-story. No setup."
+    formula: "Specific shocking fact or moment → open loop → stakes"
+    
+  sections:
+    each_section_must_have:
+      - "One key fact"
+      - "One visual moment"
+      - "One tension point"  
+      - "One reason to keep watching"
+    each_section_must_end_with:
+      - "Unresolved question or tension that pulls viewer forward"
+      
+hook_formulas:
+  promise_contradiction: "She became a billionaire by promising to change medicine. But inside the lab, the machine barely worked."
+  mystery_stakes: "Eight billion dollars disappeared. The strangest part is that the warning signs were everywhere."
+  villain_open_loop: "He told customers their money was safe. Then one spreadsheet revealed the truth."
+  timeline_reversal: "By the time the world found out, the collapse had already started years earlier."
+  number_shock: "Nine billion dollars. Built on a lie that fit on a single page."
