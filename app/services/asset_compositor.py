@@ -38,18 +38,19 @@ def load_asset_library() -> Dict:
     return library
 
 
-def remove_white_background(img: Image.Image, threshold: int = 240) -> Image.Image:
-    """Convert white background to transparent for character overlaying."""
+def remove_white_background(img: Image.Image, threshold: int = 230) -> Image.Image:
+    """Remove white/near-white/grey backgrounds using numpy for accuracy."""
+    import numpy as np
     img = img.convert("RGBA")
-    data = img.getdata()
-    new_data = []
-    for r, g, b, a in data:
-        if r > threshold and g > threshold and b > threshold:
-            new_data.append((r, g, b, 0))  # transparent
-        else:
-            new_data.append((r, g, b, a))
-    img.putdata(new_data)
-    return img
+    data = np.array(img)
+    r, g, b, a = data[:,:,0], data[:,:,1], data[:,:,2], data[:,:,3]
+    # Remove white and near-white
+    white = (r > threshold) & (g > threshold) & (b > threshold)
+    # Remove light grey backgrounds
+    grey = (r > 200) & (g > 200) & (b > 200) &            (np.abs(r.astype(int)-g.astype(int)) < 20) &            (np.abs(g.astype(int)-b.astype(int)) < 20)
+    mask = white | grey
+    data[:,:,3] = np.where(mask, 0, 255)
+    return Image.fromarray(data)
 
 
 def composite_scene(
