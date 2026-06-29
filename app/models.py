@@ -82,7 +82,8 @@ class Script(Base):
     thumbnail_prompt = Column(Text)
     x_post = Column(Text)
     word_count = Column(Integer, default=0)
-    status = Column(String(64), default="generated")  # generated, needs_review, approved, rejected
+    status = Column(String(64), default="generated")
+    format = Column(String(32), default="longform")  # generated, needs_review, approved, rejected
     created_at = Column(DateTime, default=now_utc)
 
     topic = relationship("Topic", back_populates="scripts")

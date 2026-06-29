@@ -68,41 +68,153 @@ def score_topic_with_llm(title: str, source: str, query: str) -> Optional[dict]:
 
 
 def _heuristic_score(title: str, source: str) -> dict:
-    """Score a topic without LLM using keyword matching."""
+    """
+    Score topics using evergreen documentary dimensions.
+    Curiosity, conflict, retention, evergreen value, search demand.
+    No hard bias toward AI/crypto/tech — those score only if genuinely compelling.
+    """
+    import re
     rules = load_safety_rules()
     title_lower = title.lower()
 
-    preferred = rules.get("preferred_topics", [])
-    channel_fit = 0.3
-    for kw in preferred:
-        if kw.lower() in title_lower:
-            channel_fit = min(channel_fit + 0.2, 1.0)
+    # --- EVERGREEN SIGNALS ---
+    # Topics with long-lasting search demand
+    evergreen_kw = [
+        "rise and fall", "why did", "how did", "what happened to", "the real story",
+        "explained", "collapse", "failed", "died", "bankrupt", "scandal",
+        "mystery", "unsolved", "disappeared", "forgotten", "abandoned",
+        "survival", "rescue", "trapped", "stranded", "disaster",
+        "fermi", "paradox", "universe", "galaxy", "aliens", "space",
+        "what if", "could have", "secret history", "dark history",
+        "the truth about", "nobody talks about", "you never knew",
+        "documentary", "untold story", "inside story",
+    ]
 
+    # --- CURIOSITY / HOOK SIGNALS ---
+    curiosity_kw = [
+        "secret", "hidden", "nobody knows", "you won't believe", "shocking",
+        "the real reason", "everyone missed", "mystery", "unexplained",
+        "surprising", "incredible", "unbelievable", "strange", "bizarre",
+        "the story of", "what really happened",
+    ]
+
+    # --- CONFLICT / STAKES SIGNALS ---
+    conflict_kw = [
+        "vs", "versus", "battle", "war", "fight", "collapse", "crash",
+        "scandal", "fraud", "corruption", "betrayal", "lawsuit", "investigation",
+        "accused", "ousted", "resigned", "fired", "bankrupt", "failed",
+        "controversy", "outrage", "backlash", "divided", "dispute",
+    ]
+
+    # --- RETENTION SIGNALS ---
+    # Topics with clear protagonist/antagonist/resolution — high watch time
+    retention_kw = [
+        "survivor", "escape", "rescue", "trapped", "missing", "found",
+        "died", "born", "built", "destroyed", "saved", "lost",
+        "rise", "fall", "journey", "story", "history of",
+        "how one", "the man who", "the woman who", "the company that",
+        "last days of", "inside the", "behind the",
+    ]
+
+    # --- PENALTIES ---
+    # Low-value, non-evergreen, or risky content
+    penalty_kw = [
+        "today", "breaking", "live update", "just happened", "this week",
+        "latest", "announces", "earnings report", "quarterly", "press release",
+        "weather", "recipe", "horoscope", "birthday", "anniversary",
+        "celebrity gossip", "dating", "marriage rumor",
+        # Evergreen exceptions: don't penalize if combined with evergreen signals
+    ]
+
+    # --- DEPRIORITIZE categories ---
+    deprioritize_kw = [
+        "gpu benchmark", "model release", "token price", "chart analysis",
+        "price prediction", "trading signal", "nft drop", "airdrop",
+        "sports score", "game recap", "match result",
+    ]
+
+    def has_any(text, keywords):
+        return any(k in text for k in keywords)
+
+    def count_matches(text, keywords):
+        return sum(1 for k in keywords if k in text)
+
+    # Score each dimension 0.0-1.0
+    evergreen_score = min(count_matches(title_lower, evergreen_kw) * 0.25, 1.0)
+    curiosity_score = min(count_matches(title_lower, curiosity_kw) * 0.3, 1.0)
+    conflict_score = min(count_matches(title_lower, conflict_kw) * 0.25, 1.0)
+    retention_score = min(count_matches(title_lower, retention_kw) * 0.25, 1.0)
+
+    # Evergreen source gets a base boost
+    if "evergreen_" in source:
+        evergreen_score = max(evergreen_score, 0.8)
+        curiosity_score = max(curiosity_score, 0.5)
+        retention_score = max(retention_score, 0.5)
+
+    # Penalty
+    penalty = 0.0
+    if has_any(title_lower, penalty_kw) and not has_any(title_lower, evergreen_kw):
+        penalty = 0.3
+    if has_any(title_lower, deprioritize_kw):
+        penalty = max(penalty, 0.4)
+
+    # Monetization — evergreen documentary = high CPM
     monetization = 0.5
-    if any(k in title_lower for k in ["ai", "gpu", "llm", "bittensor", "crypto", "automation"]):
-        monetization = 0.8
+    if evergreen_score >= 0.5 or "evergreen_" in source:
+        monetization = 0.85
+    elif conflict_score >= 0.5:
+        monetization = 0.70
 
-    freshness = 0.7 if "reddit" in source or "rss" in source else 0.5
+    # Channel fit — documentary evergreen = max fit
+    channel_fit = 0.3
+    total_signal = evergreen_score + curiosity_score + retention_score
+    if total_signal >= 1.5 or "evergreen_" in source:
+        channel_fit = 0.95
+    elif total_signal >= 0.8:
+        channel_fit = 0.75
+    elif total_signal >= 0.4:
+        channel_fit = 0.55
+
+    # Apply penalty
+    channel_fit = max(channel_fit - penalty, 0.05)
+    monetization = max(monetization - penalty, 0.05)
+
+    # Search volume approximation
+    search_kw = ["how", "why", "what", "explained", "story", "history", "real", "truth"]
+    search_volume_score = min(count_matches(title_lower, search_kw) * 0.2, 0.9)
+    search_volume_score = max(search_volume_score, 0.3 if "evergreen_" in source else 0.2)
+
+    # Combined trend_strength
+    trend_strength = (evergreen_score * 0.3 + curiosity_score * 0.3 +
+                      conflict_score * 0.2 + retention_score * 0.2)
+    trend_strength = max(trend_strength, 0.3 if "evergreen_" in source else 0.2)
+
+    # Identify category
+    from app.agents.evergreen_topic_generator import get_category_for_topic
+    try:
+        niche = get_category_for_topic(title)
+    except Exception:
+        niche = "general"
+
+    # Safety check
     risk = 0.0
-
     for banned in rules.get("banned_topics", []):
         if banned.lower() in title_lower:
             risk = 1.0
             break
 
     return {
-        "trend_strength": 0.6,
+        "trend_strength": trend_strength,
         "monetization_score": monetization,
         "channel_fit": channel_fit,
-        "low_competition_score": 0.5,
-        "freshness_score": freshness,
-        "content_depth_score": 0.6,
+        "low_competition_score": search_volume_score,
+        "freshness_score": 0.9 if "evergreen_" in source else 0.5,
+        "content_depth_score": 0.85 if channel_fit >= 0.75 else 0.5,
         "risk_score": risk,
-        "niche": "ai-tech",
-        "angle": f"Explaining {title} for infrastructure builders",
+        "niche": niche,
+        "angle": f"Documentary storytelling: protagonist, conflict, stakes, resolution for: {title}",
         "reject_reason": "",
     }
-
 
 def calculate_final_score(scores: dict) -> float:
     """Apply weighted scoring formula."""

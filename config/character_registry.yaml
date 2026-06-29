@@ -1,0 +1,84 @@
+# Trend Forge Character Registry
+# Locked visual profiles for consistent character appearance across all scenes
+# Each character has a seed for SD consistency + detailed description
+
+characters:
+  # FTX / Crypto
+  sam_bankman_fried:
+    full_name: "Sam Bankman-Fried"
+    aliases: ["sam", "sbf", "bankman-fried", "bankman"]
+    seed: 1337
+    description: "young man in his early thirties, thick curly dark hair, pale skin, wearing black FTX t-shirt, thin build, slightly awkward posture, wide eyes, nervous energy"
+    emotion_default: "conflicted expression, hiding something"
+    style_note: "recognizable tech entrepreneur look, casual not corporate"
+
+  caroline_ellison:
+    full_name: "Caroline Ellison"
+    aliases: ["caroline", "ellison"]
+    seed: 2048
+    description: "young woman in late twenties, shoulder-length blonde hair, business casual clothing, nervous expression, glasses sometimes, slight build"
+    emotion_default: "anxious, uncertain"
+
+  # Lehman Brothers
+  richard_fuld:
+    full_name: "Richard Fuld"
+    aliases: ["fuld", "dick fuld"]
+    seed: 4096
+    description: "middle-aged man in his sixties, silver hair slicked back, expensive dark suit, square jaw, intense intimidating expression, power tie"
+    emotion_default: "arrogant confidence"
+
+  # Enron
+  kenneth_lay:
+    full_name: "Kenneth Lay"
+    aliases: ["ken lay", "kenneth lay"]
+    seed: 8192
+    description: "older man in his sixties, white hair, grandfatherly appearance, expensive suit, reading glasses, deceptively friendly smile"
+    emotion_default: "charming but deceptive"
+
+  jeff_skilling:
+    full_name: "Jeff Skilling"
+    aliases: ["skilling", "jeff skilling"]
+    seed: 9999
+    description: "sharp-featured man in his forties, dark hair, intense focused eyes, tailored suit, aggressive confident posture"
+    emotion_default: "calculating arrogance"
+
+  # Generic recurring types
+  generic_investor:
+    full_name: "Panicked Investor"
+    aliases: ["investor", "customer", "victim"]
+    seed: 111
+    description: "ordinary middle-aged person, business casual, wide terrified eyes, hands on head, looking at phone or screen in horror"
+    emotion_default: "panic and disbelief"
+
+  generic_judge:
+    full_name: "Federal Judge"
+    aliases: ["judge"]
+    seed: 222
+    description: "stern older person in black judicial robes, silver hair, reading glasses, wooden gavel, authoritative expression"
+    emotion_default: "stern authority"
+
+  generic_lawyer:
+    full_name: "Defense Lawyer"
+    aliases: ["lawyer", "attorney", "counsel"]
+    seed: 333
+    description: "professional in expensive suit, briefcase, serious expression, papers in hand"
+    emotion_default: "serious concentration"
+
+  # Historical
+  count_saint_germain:
+    full_name: "Count of Saint Germain"
+    aliases: ["saint germain", "count", "germain"]
+    seed: 42
+    description: "mysterious elegant nobleman, long dark hair, piercing intelligent eyes, ornate burgundy coat with gold trim, ageless face, knowing slight smile"
+    emotion_default: "mysterious and knowing"
+
+  henry_lehman:
+    full_name: "Henry Lehman"
+    aliases: ["henry lehman", "lehman"]
+    seed: 5555
+    description: "19th century German immigrant, dark beard, period clothing, determined entrepreneurial expression"
+    emotion_default: "determined ambition"
+
+# How seeds work:
+# Same seed + same description = same character appearance
+# Use in SD: generator=torch.Generator("cuda").manual_seed(character.seed)

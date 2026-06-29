@@ -1,0 +1,159 @@
+# Evergreen content categories for faceless documentary channel
+# Each category has a target weight, example topics, and visual keywords
+
+categories:
+
+  financial_rise_fall:
+    display_name: "Financial Rise & Fall"
+    weight: 0.30
+    description: "Business failures, corporate scandals, rise and fall of companies"
+    examples:
+      - "Why WeWork Collapsed"
+      - "The Rise and Fall of Theranos"
+      - "How Kodak Lost Everything"
+      - "The Blockbuster Story"
+      - "Inside Enron's Collapse"
+      - "How Sears Went Bankrupt"
+      - "The FTX Fraud Explained"
+      - "Why Lehman Brothers Failed"
+      - "The Nokia Downfall"
+      - "How RadioShack Died"
+    keywords:
+      - "company collapse"
+      - "business failure"
+      - "corporate scandal"
+      - "bankruptcy"
+      - "fraud"
+      - "executive greed"
+      - "stock crash"
+      - "CEO misconduct"
+    visual_themes:
+      - "empty office building"
+      - "stock market crash"
+      - "corporate boardroom"
+      - "bankruptcy court"
+      - "business newspaper"
+
+  dark_forgotten_history:
+    display_name: "Dark & Forgotten History"
+    weight: 0.20
+    description: "Abandoned places, forgotten disasters, lost expeditions, historical mysteries"
+    examples:
+      - "The Town That Vanished Overnight"
+      - "America's Dead Shopping Malls"
+      - "The Lost Colony of Roanoke"
+      - "The Dyatlov Pass Mystery"
+      - "The Forgotten WWII Experiment"
+      - "The City Buried Under a City"
+      - "The Plague Town Nobody Talks About"
+    keywords:
+      - "abandoned"
+      - "forgotten"
+      - "lost"
+      - "mystery"
+      - "disappeared"
+      - "secret history"
+      - "dark chapter"
+    visual_themes:
+      - "abandoned building"
+      - "ghost town"
+      - "old documents"
+      - "historical archive"
+      - "ruins"
+
+  survival_stories:
+    display_name: "Survival Stories"
+    weight: 0.20
+    description: "Cave rescues, plane crashes, lost at sea, extreme survival situations"
+    examples:
+      - "The Thai Cave Rescue"
+      - "Alive — The Andes Plane Crash"
+      - "The Shackleton Expedition"
+      - "Lost at Sea for 438 Days"
+      - "The Miracle of Chilean Miners"
+      - "The Avalanche That Buried a Town"
+    keywords:
+      - "survival"
+      - "rescue"
+      - "trapped"
+      - "stranded"
+      - "disaster"
+      - "against all odds"
+      - "true story"
+    visual_themes:
+      - "rescue helicopter"
+      - "mountain wilderness"
+      - "ocean survival"
+      - "cave rescue"
+      - "emergency response"
+
+  space_mysteries:
+    display_name: "Space & Universe Mysteries"
+    weight: 0.15
+    description: "Space exploration, cosmic mysteries, extraterrestrial theories, future of humanity"
+    examples:
+      - "The WOW Signal Explained"
+      - "What Is the Fermi Paradox?"
+      - "The Great Filter Theory"
+      - "Is Planet Nine Real?"
+      - "What Are Dyson Spheres?"
+      - "The Universe Is Older Than We Thought"
+      - "Why We Haven't Found Aliens Yet"
+    keywords:
+      - "space"
+      - "universe"
+      - "aliens"
+      - "extraterrestrial"
+      - "cosmic"
+      - "mystery"
+      - "NASA"
+      - "galaxy"
+    visual_themes:
+      - "space galaxy stars"
+      - "telescope observatory"
+      - "planet earth from space"
+      - "astronaut space"
+      - "cosmos universe"
+
+  future_of_work_ai:
+    display_name: "Future of Work & AI"
+    weight: 0.15
+    description: "AI replacing jobs, automation consequences, tech ethics, digital identity — framed as human impact"
+    examples:
+      - "Will AI Replace Truck Drivers?"
+      - "The First Billion Dollar One-Person Company"
+      - "Why White Collar Jobs Are Disappearing"
+      - "The Automation of Everything"
+      - "What Happens When AI Takes Your Job"
+      - "The Last Human Profession"
+    keywords:
+      - "automation"
+      - "AI jobs"
+      - "future of work"
+      - "robots replacing"
+      - "job displacement"
+      - "human vs machine"
+    visual_themes:
+      - "robot factory automation"
+      - "office workers"
+      - "artificial intelligence computer"
+      - "warehouse automation"
+      - "technology future"
+
+# Daily rotation schedule — prevents same category appearing more than once per day
+rotation:
+  max_per_category_per_day: 1
+  daily_targets:
+    - financial_rise_fall
+    - dark_forgotten_history
+    - survival_stories
+    - space_mysteries
+    - future_of_work_ai
+
+# Scoring weights for evergreen scoring
+scoring:
+  curiosity_score: 0.25
+  conflict_score: 0.20
+  retention_score: 0.20
+  evergreen_score: 0.20
+  search_volume_score: 0.15

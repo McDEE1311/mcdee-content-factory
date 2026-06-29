@@ -1,0 +1,26 @@
+# Channel Configuration Example
+# Copy to channels.yaml and fill in your actual values
+
+channels:
+  - id: "main"
+    name: "AI Infrastructure Daily"
+    youtube_channel_id: "UC_YOUR_CHANNEL_ID_HERE"
+    niche: "AI agents, GPU infrastructure, Bittensor, crypto compute, automation"
+    tone: "direct, technical, informative, no hype"
+    target_audience: "builders, developers, infrastructure enthusiasts, crypto-AI crossover"
+    video_style: "explainer"
+    daily_limit: 10
+    upload_window_start: 8
+    upload_window_end: 20
+    timezone: "America/Chicago"
+    x_handle: "@YourXHandle"
+    description: |
+      Daily AI Infrastructure Briefs: AI agents, GPU economics, Bittensor,
+      crypto compute, and automation opportunities explained fast.
+    keywords:
+      - "AI agents"
+      - "Bittensor"
+      - "GPU"
+      - "local LLM"
+      - "automation"
+      - "crypto compute"

@@ -79,7 +79,7 @@ def create_thumbnail(
         draw.text((42, y), line, font=font_large, fill=text_color)
 
     # Bottom label
-    draw.text((42, height - 60), "McDEE • AI INFRASTRUCTURE DAILY", font=font_small, fill=accent_color)
+    draw.text((42, height - 60), "McDEE • DAILY TREND BRIEF", font=font_small, fill=accent_color)
 
     img.save(output_path, "PNG", optimize=True)
     logger.info(f"[image] Thumbnail saved: {output_path}")

@@ -128,32 +128,27 @@ def build_scene_prompt_v6(
     
     # Build environment-first prompt
     parts = []
-    
-    # 1. The specific story moment — cap at 150 chars to leave room for sub_focus
-    if storyboard_sd:
-        parts.append(storyboard_sd[:150])
+
+    if not sub_focus:
+        # First occurrence — use storyboard scene directly
+        if storyboard_sd:
+            parts.append(storyboard_sd[:200])
+        else:
+            parts.append(action[:120])
+        if char_desc:
+            parts.append(f"{char_desc[:70]}")
+        if location_sd:
+            parts.append(location_sd[:60])
     else:
-        parts.append(action[:100])
-    
-    # 2. Location detail from visual bible
-    if location_sd:
-        parts.append(location_sd)
-    elif location:
-        parts.append(location)
-    
-    # 3. Character — simplified, not photorealistic
-    if char_desc:
-        parts.append(f"simplified character: {char_desc[:80]}")
-    
-    # 4. Object/evidence from visual bible
-    if obj_sd:
-        parts.append(obj_sd[:60])
-    
-    # 5. Sub-focus variation
-    if sub_focus:
+        # Repeat occurrence — sub_focus IS the visual, creates genuinely different image
         parts.append(sub_focus)
-    
-    # 6. Atmosphere + composition
+        if location or location_sd:
+            parts.append(location_sd[:60] if location_sd else location)
+        if "character" in sub_focus and char_desc:
+            parts.append(char_desc[:60])
+
+    if obj_sd and not sub_focus:
+        parts.append(obj_sd[:50])
     parts.append(f"{emotion} atmosphere")
     parts.append(camera)
     parts.append("rich detailed background, no text, no watermark")

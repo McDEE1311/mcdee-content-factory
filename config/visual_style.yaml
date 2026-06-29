@@ -1,0 +1,92 @@
+# Trend Forge Visual Style Configuration
+# All AI-generated scenes use this as the base style
+
+styles:
+  dark_history:
+    name: "Trend Forge Dark History"
+    base_prompt: >
+      minimalist documentary cartoon illustration,
+      hand-drawn ink style, bold black outlines,
+      muted sepia and warm paper tones,
+      simple expressive characters,
+      cinematic composition,
+      subtle crosshatching shadows,
+      clean background, no text, no watermark
+    negative_prompt: >
+      realistic photo, 3d render, anime, glossy, blurry,
+      watermark, text, logo, extra fingers, distorted face,
+      modern objects, modern clothing
+    color_palette: "black, white, sepia, aged paper"
+    era: "historical"
+
+  financial_rise_fall:
+    name: "Trend Forge Financial Documentary"
+    base_prompt: >
+      1930s vintage editorial cartoon illustration,
+      ink drawing style, Fleischer Studios animation style,
+      bold black outlines, crosshatching shadows,
+      black and white with sepia tone,
+      dramatic lighting, cinematic composition,
+      no text, no watermark
+    negative_prompt: >
+      photo, realistic, 3d, modern style, color photo,
+      blurry, low quality, watermark, text, letters, numbers
+    color_palette: "black, white, sepia"
+    era: "1920s-1950s"
+
+  historical_mystery:
+    name: "Trend Forge Historical Mystery"
+    base_prompt: >
+      cinematic animated historical illustration,
+      painterly detailed brushwork,
+      dramatic chiaroscuro lighting,
+      warm candlelight gold burgundy navy palette,
+      mysterious atmospheric, graphic novel quality,
+      18th century European aesthetic,
+      no text, no watermark
+    negative_prompt: >
+      photo, realistic, 3d render, modern, blurry,
+      watermark, anime, stock photo, text, letters
+    color_palette: "gold, burgundy, navy, candlelight, aged parchment"
+    era: "18th century"
+
+  survival_stories:
+    name: "Trend Forge Survival Documentary"
+    base_prompt: >
+      dramatic documentary illustration,
+      high contrast lighting, tense atmosphere,
+      painterly style, cinematic composition,
+      bold colors, realistic but illustrated,
+      no text, no watermark
+    negative_prompt: >
+      photo, 3d render, blurry, watermark, text,
+      anime, cartoon, low quality
+    color_palette: "high contrast, dark blues, emergency red, natural tones"
+    era: "modern"
+
+  space_mysteries:
+    name: "Trend Forge Space Documentary"
+    base_prompt: >
+      cinematic space documentary illustration,
+      deep space atmosphere, cosmic scale,
+      rich deep blues and purples, star fields,
+      dramatic lighting, painterly style,
+      scientific visualization aesthetic,
+      no text, no watermark
+    negative_prompt: >
+      photo, realistic photo, blurry, watermark,
+      text, logo, anime, cartoon
+    color_palette: "deep blue, purple, cosmic black, starlight silver"
+    era: "cosmic"
+
+# Default style when category not matched
+default_style: "dark_history"
+
+# Camera motion options for Ken Burns effect
+camera_motions:
+  - "slow zoom in"
+  - "slow zoom out"
+  - "slow pan left"
+  - "slow pan right"
+  - "slow push in upper left"
+  - "slow drift right"

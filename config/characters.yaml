@@ -1,0 +1,64 @@
+# Trend Forge Character Library
+# Reusable character descriptions for consistent appearance across scenes
+
+characters:
+  ceo:
+    description: "middle-aged man, dark expensive suit, square glasses, slick grey hair, confident arrogant expression"
+    body: "tall, broad shoulders, commanding posture"
+
+  worker:
+    description: "ordinary worker, blue collar shirt, tired honest expression, average build, slightly disheveled"
+    body: "medium height, worn clothing"
+
+  scientist:
+    description: "lab coat, messy brown hair, round wire glasses, curious intelligent expression, pen in pocket"
+    body: "slim, slightly stooped from desk work"
+
+  politician:
+    description: "dark suit, American flag pin, silver hair combed back, practiced smile, firm handshake pose"
+    body: "average height, authoritative stance"
+
+  journalist:
+    description: "press badge, notepad in hand, alert curious eyes, practical clothing, recorder or camera"
+    body: "energetic, always leaning forward"
+
+  detective:
+    description: "worn trench coat, fedora hat, sharp observant eyes, cigarette or magnifying glass"
+    body: "lean, watchful, slightly hunched"
+
+  soldier:
+    description: "military uniform appropriate to era, disciplined expression, strong posture"
+    body: "fit, rigid stance, alert"
+
+  investor:
+    description: "expensive suit, cufflinks, newspaper or stock chart in hand, calculating expression"
+    body: "well-fed, confident, manicured"
+
+  historian:
+    description: "tweed jacket, round glasses, grey beard, surrounded by books and documents, thoughtful"
+    body: "professorial, slightly distracted"
+
+  nobleman_18th:
+    description: "ornate coat with gold embroidery, powdered wig or long dark hair, ruffled cravat, aristocratic bearing"
+    body: "elegant posture, refined gestures"
+
+  count_saint_germain:
+    description: "mysterious elegant nobleman, long dark hair, piercing intelligent eyes, ornate burgundy coat with gold trim, ageless face, knowing slight smile"
+    body: "tall, elegant, moves with unusual grace and confidence"
+    seed: 42
+
+  king_louis_xv:
+    description: "French king, elaborate royal robes, powdered wig with curls, gold crown, ornate throne room"
+    body: "slightly portly, regal posture"
+
+  ai_robot:
+    description: "friendly humanoid robot, simple geometric design, glowing blue eyes, clean white and silver plating"
+    body: "smooth movements, non-threatening scale"
+
+  family:
+    description: "nuclear family, parents and two children, casual clothing, relatable ordinary appearance"
+    body: "average Americans, warm expressions"
+
+# How to use characters in prompts:
+# Replace character placeholder with: characters.ceo.description
+# Example: "CEO character - " + characters.ceo.description + ", in boardroom scene"

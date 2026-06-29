@@ -13,6 +13,8 @@ from app.db import get_db
 from app.services.rss_client import fetch_all_rss
 from app.services.pytrends_client import fetch_google_trends
 from app.services.reddit_client import fetch_reddit_trends
+from app.services.youtube_trends_client import get_trending_by_niche, is_api_configured
+from app.agents.evergreen_topic_generator import generate_all_evergreen_topics
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +54,33 @@ def run_trend_scan(db: Session, run_date: str = None) -> List[TrendItem]:
         all_raw.extend(reddit_items)
     except Exception as e:
         logger.warning(f"[trend_scanner] Reddit failed: {e}")
+
+    # 4. Evergreen topic generation — creates topics from Ollama knowledge
+    logger.info("[trend_scanner] Generating evergreen topics...")
+    try:
+        evergreen_items = generate_all_evergreen_topics(db, run_date=run_date, topics_per_category=3)
+        logger.info(f"[trend_scanner] Evergreen: {len(evergreen_items)} topics generated")
+    except Exception as e:
+        logger.warning(f"[trend_scanner] Evergreen generation failed: {e}")
+
+    # 5. YouTube trending/viral search (for Shorts content discovery)
+    if is_api_configured():
+        logger.info("[trend_scanner] Fetching YouTube trending...")
+        try:
+            yt_items = get_trending_by_niche()
+            for item in yt_items:
+                all_raw.append({
+                    "source": "youtube_viral",
+                    "raw_title": item["title"],
+                    "query": item.get("niche_query", ""),
+                    "url": item.get("url", ""),
+                    "score_raw": 0.0,
+                })
+            logger.info(f"[trend_scanner] YouTube: {len(yt_items)} items")
+        except Exception as e:
+            logger.warning(f"[trend_scanner] YouTube trending failed: {e}")
+    else:
+        logger.info("[trend_scanner] YouTube API key not configured, skipping")
 
     # Deduplicate by title
     seen_titles = set()

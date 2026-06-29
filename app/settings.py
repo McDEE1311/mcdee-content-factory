@@ -21,7 +21,8 @@ class Settings(BaseSettings):
     OLLAMA_MODEL: str = "qwen2.5:7b-instruct"
 
     # Publishing
-    DAILY_VIDEO_LIMIT: int = 10
+    DAILY_VIDEO_LIMIT: int = 20
+    MAX_RANK_CANDIDATES: int = 20
     AUTO_APPROVE: bool = False
     UPLOAD_START_HOUR: int = 8
     UPLOAD_END_HOUR: int = 20
@@ -47,6 +48,12 @@ class Settings(BaseSettings):
     # Stock Images
     PEXELS_API_KEY: Optional[str] = None
     PIXABAY_API_KEY: Optional[str] = None
+
+    # Video rendering
+    VIDEO_TARGET_SECONDS: int = 90
+    VIDEO_MAX_SECONDS: int = 600
+    VIDEO_MIN_IMAGES: int = 10
+    VIDEO_MAX_IMAGES: int = 30
 
     # TTS
     TTS_ENGINE: str = "piper"
