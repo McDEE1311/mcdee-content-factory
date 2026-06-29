@@ -30,3 +30,12 @@ client_secret*.json
 dist/
 build/
 .env
+kokoro-v1.0.onnx
+kokoro-v1.0.onnx.1
+voices-v1.0.bin
+voices-v1.0.bin.1
+*.onnx
+*.bin
+mcdee-content-factory/
+outputs_ai_backup_*/
+backups/
